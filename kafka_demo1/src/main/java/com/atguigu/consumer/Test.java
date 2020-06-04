@@ -35,7 +35,6 @@ public class Test {
 //          properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, position);
 
 
-
         Properties props = new Properties();
         // 只需要提供一个或多个 broker 的 IP 和端口
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.79.176:9092");

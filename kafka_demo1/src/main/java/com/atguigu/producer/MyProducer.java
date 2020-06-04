@@ -12,7 +12,7 @@ import java.util.concurrent.Future;
 
 public class MyProducer {
 
-    static{
+    static {
         BasicConfigurator.configure();
     }
 
@@ -46,8 +46,8 @@ public class MyProducer {
         System.out.println("tt");
         //10.发送数据
         for (int i = 0; i < 10; i++) {
-            Future<RecordMetadata> first = producer.send(new ProducerRecord<String, String>("testtopic","wjx", "kafka数据-----" + i));
-            try{
+            Future<RecordMetadata> first = producer.send(new ProducerRecord<String, String>("testtopic", "wjx", "kafka数据-----" + i));
+            try {
                 //同步方式
                 RecordMetadata recordMetadata = first.get();
             } catch (InterruptedException e) {

@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class MyConsumer {
-    static{
+    static {
         BasicConfigurator.configure();
     }
 
@@ -90,7 +90,7 @@ public class MyConsumer {
                 topicExist2(ipAndPort, topic, groupid);
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -114,7 +114,7 @@ public class MyConsumer {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        System.out.println("topic 列表："+topics);
+        System.out.println("topic 列表：" + topics);
     }
 
     private static void topicExist(String ipAndPort, String topic) {
@@ -135,15 +135,15 @@ public class MyConsumer {
             e.printStackTrace();
         }
 //            System.out.println("topic 列表："+topics);
-        if(topics == null){
+        if (topics == null) {
             System.out.println("topic列表获取不到");
             return;
         }
         // 判断是否存在
-        if(topics.contains(topic)){
-            System.out.println("topic: [ "+ topic+" ] 存在.") ;
-        }else {
-            System.out.println("topic: [ "+ topic+" ] 不存在！！！") ;
+        if (topics.contains(topic)) {
+            System.out.println("topic: [ " + topic + " ] 存在.");
+        } else {
+            System.out.println("topic: [ " + topic + " ] 不存在！！！");
         }
     }
 
@@ -179,10 +179,10 @@ public class MyConsumer {
         // 自动提交的延时
 //        properties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG,"1000");
         // Key,Value的反序列化
-        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringDeserializer");
+        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         // 重置消费者的offset
-        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 //          properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, position);
 
         //消费者组
@@ -195,19 +195,18 @@ public class MyConsumer {
 //        consumer.subscribe(Arrays.asList("first", "second","third","four"));
         consumer.subscribe(Arrays.asList(topic));
 
-        while(true){
+        while (true) {
             //获取数据
             ConsumerRecords<String, String> consumerRecords = consumer.poll(1000);
             //解析并打印consumerRecords
-            for (ConsumerRecord<String,String> consumerRecord : consumerRecords) {
-                System.out.println(consumerRecord.key()+"---------"+consumerRecord.value());
+            for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
+                System.out.println(consumerRecord.key() + "---------" + consumerRecord.value());
             }
         }
     }
 
 
-
-    private static void producer(String ipAndPort,String topic) {
+    private static void producer(String ipAndPort, String topic) {
         //1.创建Kafka生产者的配置信息
         Properties properties = new Properties();
         //2.指定连接的Kafka集群
@@ -233,8 +232,8 @@ public class MyConsumer {
 //        System.out.println("tt");
         //10.发送数据
         for (int i = 0; i < 10000; i++) {
-            Future<RecordMetadata> first = producer.send(new ProducerRecord<String, String>(topic,"wjxProducer", "----------kafka数据-------" + i));
-            try{
+            Future<RecordMetadata> first = producer.send(new ProducerRecord<String, String>(topic, "wjxProducer", "----------kafka数据-------" + i));
+            try {
                 //同步方式
                 RecordMetadata recordMetadata = first.get();
             } catch (InterruptedException e) {
@@ -266,16 +265,16 @@ public class MyConsumer {
             e.printStackTrace();
         }
 //            System.out.println("topic 列表："+topics);
-        if(topics == null){
+        if (topics == null) {
             System.out.println("topic列表获取不到");
             return;
         }
         // 判断是否存在
-        if(topics.contains(topic) ){
-            System.out.println("topic: +"+ topic+" 存在.") ;
-            System.out.println("topic: +"+ topic+",消费组id:" +  groupid +",消费偏移量" + client.listConsumerGroupOffsets(groupid)) ;
-        }else {
-            System.out.println("topic: +"+ topic+" 不存在！！！") ;
+        if (topics.contains(topic)) {
+            System.out.println("topic: +" + topic + " 存在.");
+            System.out.println("topic: +" + topic + ",消费组id:" + groupid + ",消费偏移量" + client.listConsumerGroupOffsets(groupid));
+        } else {
+            System.out.println("topic: +" + topic + " 不存在！！！");
         }
     }
 }

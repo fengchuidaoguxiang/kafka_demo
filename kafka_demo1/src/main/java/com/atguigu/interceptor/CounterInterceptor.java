@@ -6,10 +6,10 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.Map;
 
-public class CounterInterceptor implements ProducerInterceptor<String,String> {
+public class CounterInterceptor implements ProducerInterceptor<String, String> {
 
     private int success;
-    private int  error;
+    private int error;
 
 
     public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
@@ -17,10 +17,10 @@ public class CounterInterceptor implements ProducerInterceptor<String,String> {
     }
 
     public void onAcknowledgement(RecordMetadata metadata, Exception exception) {
-        if(metadata != null){
-            success ++;
-        }else {
-            error ++;
+        if (metadata != null) {
+            success++;
+        } else {
+            error++;
         }
     }
 

@@ -45,7 +45,7 @@ public class InterceptorProducer {
         System.out.println("tt");
         //10.发送数据
         for (int i = 0; i < 10; i++) {
-            Future<RecordMetadata> first = producer.send(new ProducerRecord<String, String>("first","wjx", "atguigu-----" + i));
+            Future<RecordMetadata> first = producer.send(new ProducerRecord<String, String>("first", "wjx", "atguigu-----" + i));
         }
 
 //        try {

@@ -18,7 +18,7 @@ public class TimeInterceptor implements ProducerInterceptor<String, String> {
         String value = record.value();
         //2.创建一个新的ProducerRecord对象，并返回
         return new ProducerRecord<String, String>(record.topic(), record.partition(),
-                record.key(),System.currentTimeMillis() + "," + record.value());
+                record.key(), System.currentTimeMillis() + "," + record.value());
     }
 
     public void onAcknowledgement(RecordMetadata metadata, Exception exception) {
